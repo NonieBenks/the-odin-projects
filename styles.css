@@ -1,0 +1,193 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    border: none;
+    background-color: #60a5fa;
+    font-weight: 900;
+    color: #f1f5f9;
+    padding: 10px 25px;
+    border-radius: 15px;
+}
+
+li {
+    list-style-type: none;
+    font-size: 1.3rem;
+    font-weight: 900;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+    grid-template-columns: auto auto 1fr;
+}
+
+ul {
+    display: grid;
+    grid-gap: 10px;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1.5fr 5fr;
+    grid-template-rows: 1fr 5fr;
+    .header {
+        background-color: #f8fafc;
+        grid-area: 1/2/2/3;
+        display: grid;
+        padding: 20px;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        .search-bar {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+        }
+        .notification-bar {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: end;
+        }
+        .buttons {
+            display: grid;
+            grid-auto-flow: column;
+            align-items: end;
+            justify-items: end;
+        }
+        .notification-bar > img {
+            max-width: 50px;
+            border-radius: 50%;
+        }
+        .intro > h6 {
+            margin: 0;
+        }
+        .intro {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: auto 1fr;
+            grid-template-areas:
+                "img hi"
+                "img name";
+            .intro-img {
+                grid-area: img;
+            }
+            .intro-img > img {
+                max-width: 60px;
+                border-radius: 50%;
+            }
+        }
+        .intro > h6 {
+            grid-area: hi;
+        }
+        .intro > h2 {
+            grid-area: name;
+            margin: 0;
+        }
+    }
+    
+    .main {
+        background-color: #f1f5f9;
+        grid-area: 2/2/3/3;
+        grid-template-areas:
+        "projects announcements"
+        "projects trending";
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 15px;
+        padding: 20px;
+        .announcements {
+            grid-area: announcements;
+            .announcements-container {
+                background-color: white;
+                border-radius: 15px;
+                padding: 10px 20px;
+                .announcements + div {
+                    border-top: 3px solid #bbb;
+                }
+            }
+        }
+        .projects {
+            grid-area: projects;
+            .projects-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                gap: 15px;
+                .project-card {
+                    background-color: white;
+                    border-radius: 15px;
+                    padding: 15px;
+                    max-height: 180px;
+                    .project-card > h4 {
+                        margin: 20px 0;
+                    }
+                    .card-icons {
+                        display: grid;
+                        justify-content: end;
+                        grid-auto-flow: column;
+                        gap: 20px;
+                    }
+                }
+            }
+        }
+        .trending {
+            grid-area: trending;
+            .trending-container {
+                background-color: white;
+                border-radius: 15px;
+                padding: 20px;
+                display: grid;
+                gap: 10px;
+                .trending-item {
+                    display: grid;
+                    grid-template-areas: "img name"
+                        "img desc";
+                    grid-template-columns: auto 1fr;
+                    gap: 0 10px;
+                }
+                .trending-item > img {
+                    grid-area: img;
+                    max-width: 50px;
+                    border-radius: 50%;
+                }
+                .trending-name {
+                    grid-area: name;
+                }
+                .description {
+                    grid-area: desc;
+                }
+            }
+        }
+    }
+}
+
+
+
+.sidebar {
+    background-color: #60a5fa;
+    grid-area: 1/1/3/2;
+    display: grid;
+    padding: 0 20px;
+    color: #f8fafc;
+    grid-template-rows: auto auto auto 1fr;
+}
+
+.sidebar-title {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;   
+}
+
+.material-icons.md-36 { 
+    font-size: 36px; 
+}
