@@ -3,6 +3,9 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.toggleRead = function() {
+        this.read = !this.read;
+    }
 }
 
 const book1 = new Book('Pride and Prejudice', 'Jane Austen', 358, false);
@@ -16,6 +19,7 @@ function displayLibrary() {
     myLibrary.forEach(book => {
         const bookEl = document.createElement('div');
         bookEl.className = 'book-item';
+        bookEl.dataset.id = myLibrary.indexOf(book);
         document.getElementById('library').appendChild(bookEl);
         const bookTitle = document.createElement('h4');
         bookTitle.textContent = `${book.title} by ${book.author}`;
@@ -28,8 +32,16 @@ function displayLibrary() {
         const readCheckbox = document.createElement('input');
         readCheckbox.setAttribute("type", "checkbox");
         readCheckbox.checked = book.read;
+        readCheckbox.addEventListener("click", () => {
+            book.toggleRead();
+        });
         readStatus.appendChild(readCheckbox);
         bookEl.appendChild(readStatus);
+        const deleteButton = document.createElement('button');
+        deleteButton.addEventListener("click", () => {
+            deleteBook(bookEl.dataset.id);
+        });
+        bookEl.appendChild(deleteButton);
     });
 }
 
@@ -48,7 +60,6 @@ closeButton.addEventListener("click", () => {
 const addBookButton = document.querySelector("#add-book");
 
 function addBook() {
-
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
@@ -56,6 +67,11 @@ function addBook() {
 
     myLibrary.push(new Book(title, author, pages, read));
     displayLibrary();
+}
+
+function deleteBook(bookIndex) {
+    const bookEl = document.querySelector(`[data-id="${bookIndex}"]`);
+    bookEl.remove();
 }
 
 displayLibrary();
