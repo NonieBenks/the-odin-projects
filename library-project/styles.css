@@ -1,0 +1,35 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+}
+
+#library { 
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fill, 250px);
+    padding: 15px;
+}
+
+.book-item {
+    max-width: 15vw;
+    padding: 15px;
+    background-color: lightskyblue;
+    border-radius: 10px;
+}
+
+h4 {
+    margin-top: 0;
+}
+
+h2 {
+    background-color: darkgray;
+    margin: 0;
+    padding: 15px;
+}
+
+button {
+    border: none;
+    font-size: 16px;
+    padding: 10px;
+    margin: 15px;
+}
