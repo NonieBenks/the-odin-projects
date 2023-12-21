@@ -1,8 +1,8 @@
 let Gameboard = {
     board: [
-    [ , , ,],
-    [ , , ,],
-    [ , , ,]
+        [ , , ,],
+        [ , , ,],
+        [ , , ,]
     ],
     wins : [
         ["0,0", "1,1", "2,2"],
@@ -28,11 +28,33 @@ let Player2 = {
     moves: []
 }
 
+
+function displayBoard() {
+    const board = document.querySelector('.board');
+    const cells = document.querySelectorAll('.cell');
+
+    cells.forEach(cell => {
+        console.log(cell);
+        cell.addEventListener('click', makeMove(cell.dataset.row, cell.dataset.column, Player1));
+    });
+
+    Gameboard.board.forEach(array => 
+     {
+        array.forEach(item=> {
+            console.log(`${Gameboard.board.indexOf(array)} , ${array.indexOf(item)}`);
+        })
+     }   
+    )
+}
+
 const getBoard = () => Gameboard.board;
+
+displayBoard();
 
 function switchPlayer(activePlayer) {
     activePlayer = activePlayer === Player1 ? Player2 : Player1;
 }
+
 
 function makeMove(x, y, activePlayer) {
     if(!Gameboard.board[x][y]) { 
