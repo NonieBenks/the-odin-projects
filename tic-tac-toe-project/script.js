@@ -1,10 +1,11 @@
-let Gameboard = {
-    board: [
+function Gameboard() {
+    const board = [
         [ , , ,],
         [ , , ,],
         [ , , ,]
-    ],
-    wins : [
+    ];
+
+    const wins = [
         ["0,0", "1,1", "2,2"],
         ["2,0", "1,1", "0,2"],
         ["0,0", "1,0", "2,0"],
@@ -13,75 +14,91 @@ let Gameboard = {
         ["1,0", "1,1", "1,2"],
         ["2,0", "2,1", "2,2"],
         ["0,0", "0,1", "0,2"]
-    ]
+    ];
+
+    const getBoard = () => board;
+    const getWins = () => wins;
+
+    const displayBoardDOM = () => {
+        const cellsArr = document.querySelectorAll('.cell');
+    
+        cellsArr.forEach(cell => {
+            cell.addEventListener('click', (event) => {
+                cell.textContent = game.getActivePlayer().marker;
+                game.makeMove(cell.dataset.row, cell.dataset.column, game.getActivePlayer())
+            });
+        });
+    
+        getBoard().forEach(array => 
+         {
+            array.forEach(item=> {
+                console.log(`${getBoard().indexOf(array)} , ${array.indexOf(item)}`);
+            })
+         }   
+        )
+    }
+
+    displayBoardDOM();
+
+    return { getBoard, displayBoardDOM, getWins };
 };
 
-let Player1 = {
-    marker: 'X',
-    name: 'Player 1',
-    moves: []
-}
-
-let Player2 = {
-    marker: 'O',
-    name: 'Player 2',
-    moves: []
-}
 
 
-function displayBoard() {
-    const board = document.querySelector('.board');
-    const cells = document.querySelectorAll('.cell');
+function GameController() {
+    const gameboard = Gameboard();
 
-    cells.forEach(cell => {
-        console.log(cell);
-        cell.addEventListener('click', makeMove(cell.dataset.row, cell.dataset.column, Player1));
-    });
+    function Player(name, marker, moves) {
+        this.name = name;
+        this.marker = marker;
+        this.moves = moves;
+    }
+    
+    const Player1 = new Player('Player 1', 'X', []);
+    const Player2 = new Player('Player 2', 'O', []);
 
-    Gameboard.board.forEach(array => 
-     {
-        array.forEach(item=> {
-            console.log(`${Gameboard.board.indexOf(array)} , ${array.indexOf(item)}`);
-        })
-     }   
-    )
-}
+    let activePlayer = Player1;
 
-const getBoard = () => Gameboard.board;
+    switchPlayer = () => {
+        activePlayer = activePlayer === Player1 ? Player2 : Player1;
+    };
+    
+    const getActivePlayer = () => activePlayer;
 
-displayBoard();
+    function makeMove(x, y) {
+        if(!gameboard.getBoard()[x][y]) { 
+            getActivePlayer().moves.push(`${x},${y}`);
+            gameboard.getBoard()[x][y] = getActivePlayer().marker;
+            checkWins(getActivePlayer());
+            switchPlayer();
+        } else {
+            console.log('This space is already marked! Choose a different move.')
+        }
+    }
+    
+    function checkWins() {
+        const wins = gameboard.getWins();
+        const board = gameboard.getBoard();
+        const hasWinMove = (win) => getActivePlayer().moves.includes(win);
+    
+        wins.forEach(win => {
+            if(win.every(hasWinMove)){
+                console.log(`${getActivePlayer().name} has won!`);
+                return;
+            };
+        });
+    
+        const isATie = (array) => !array.includes(undefined);
+    
+        if(board.every(isATie)){
+            console.log(`It's a tie!`);
+        }
+    }
 
-function switchPlayer(activePlayer) {
-    activePlayer = activePlayer === Player1 ? Player2 : Player1;
-}
-
-
-function makeMove(x, y, activePlayer) {
-    if(!Gameboard.board[x][y]) { 
-        activePlayer.moves.push(`${x},${y}`);
-        checkWins(activePlayer);
-        switchPlayer(activePlayer);
-        Gameboard.board[x][y] = activePlayer.marker;
-        console.log(Gameboard.board);
-    } else {
-        console.log('This space is already marked! Choose a different move.')
+    return {
+        makeMove,
+        getActivePlayer
     }
 }
 
-function checkWins(activePlayer) {
-    const wins = Object.values(Gameboard.wins);
-    const hasWinMove = (win) => activePlayer.moves.includes(win);
-
-    wins.forEach(win => {
-        if(win.every(hasWinMove)){
-            console.log(`${activePlayer.name} has won!`);
-            return;
-        };
-    });
-
-    const isATie = (array) => !array.includes(undefined);
-
-    if(Gameboard.board.every(isATie)){
-        console.log(`It's a tie!`);
-    }
-}
+const game = GameController();
