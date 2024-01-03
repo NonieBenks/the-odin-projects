@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Document</title>
 </head>
 <body>
     <h3>Tic tac toe</h3>
+
     <div class="board">
         <div class="row">
             <div class="cell" data-row="0" data-column="0"></div>
@@ -25,6 +27,23 @@
             <div class="cell" data-row="2" data-column="2"></div>
         </div>
     </div>
+
+    <dialog id="playerWonDialog">
+        <form method="dialog">
+            <div>
+                <button type="button" onClick="window.location.reload()">Restart</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="tieDialog">
+        <form method="dialog">
+            <div>
+                <h3>It's a tie!</h3>
+                <button type="button" onClick="window.location.reload()">Restart</button>
+            </div>
+        </form>
+    </dialog>
     <script src="script.js"></script>
 </body>
 </html>

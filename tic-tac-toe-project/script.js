@@ -21,21 +21,16 @@ function Gameboard() {
 
     const displayBoardDOM = () => {
         const cellsArr = document.querySelectorAll('.cell');
+        const crossEl = `<span class="material-symbols-outlined">close</span>`;
+        const circleEl = `<span class="material-symbols-outlined">radio_button_unchecked</span>`;
     
         cellsArr.forEach(cell => {
+            //TODO: fix bug with placing different marker in the spot which is already taken
             cell.addEventListener('click', (event) => {
-                cell.textContent = game.getActivePlayer().marker;
+                cell.innerHTML= game.getActivePlayer().marker === 'X' ? crossEl : game.getActivePlayer().marker === 'O' ? circleEl : event.preventDefault();
                 game.makeMove(cell.dataset.row, cell.dataset.column, game.getActivePlayer())
             });
         });
-    
-        getBoard().forEach(array => 
-         {
-            array.forEach(item=> {
-                console.log(`${getBoard().indexOf(array)} , ${array.indexOf(item)}`);
-            })
-         }   
-        )
     }
 
     displayBoardDOM();
@@ -66,7 +61,7 @@ function GameController() {
     const getActivePlayer = () => activePlayer;
 
     function makeMove(x, y) {
-        if(!gameboard.getBoard()[x][y]) { 
+        if(gameboard.getBoard()[x][y] === undefined) { 
             getActivePlayer().moves.push(`${x},${y}`);
             gameboard.getBoard()[x][y] = getActivePlayer().marker;
             checkWins(getActivePlayer());
@@ -83,7 +78,11 @@ function GameController() {
     
         wins.forEach(win => {
             if(win.every(hasWinMove)){
-                console.log(`${getActivePlayer().name} has won!`);
+                const dialog = document.getElementById("playerWonDialog");
+                const header = document.createElement("h3");
+                header.textContent = `${getActivePlayer().name} has won!`;
+                dialog.prepend(header);
+                dialog.showModal();
                 return;
             };
         });
@@ -91,7 +90,8 @@ function GameController() {
         const isATie = (array) => !array.includes(undefined);
     
         if(board.every(isATie)){
-            console.log(`It's a tie!`);
+            const dialog = document.getElementById("tieDialog");
+            dialog.showModal();
         }
     }
 

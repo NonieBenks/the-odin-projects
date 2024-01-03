@@ -1,9 +1,51 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.board {
+    width: 300px;
+    margin: auto;
+}
+
+h3 {
+    text-align: center;
+}
+
 .board .row {
     display: flex;
 }
 
+div.cell {
+    border-color: #607d8b;
+    border-style: solid;
+    border-width: 0px;
+}
+
+.cell[data-row="1"][data-column="1"] {
+    border-width: 2px;
+}
+
+.cell[data-row="0"][data-column="1"] {
+    border-width: 0px 2px;
+}
+
+.cell[data-row="1"][data-column="0"] {
+    border-width: 2px 0px;
+}
+
+.cell[data-row="1"][data-column="2"] {
+    border-width: 2px 0px;
+}
+
+.cell[data-row="2"][data-column="1"] {
+    border-width: 0px 2px;
+}
+
 .board .row div {
-    height: 50px;
-    width: 50px;
-    border: 1px solid gray;
+    height: 100px;
+    width: 100px;
+}
+
+.material-symbols-outlined {
+    font-size: 90px !important;
 }
