@@ -8,39 +8,51 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>Tic tac toe</h3>
-
-    <div class="board">
-        <div class="row">
-            <div class="cell" data-row="0" data-column="0"></div>
-            <div class="cell" data-row="0" data-column="1"></div>
-            <div class="cell" data-row="0" data-column="2"></div>
+    <div class="container">
+        <h3>Tic tac toe</h3>
+        <div class="board">
+            <div class="row">
+                <div class="cell" data-row="0" data-column="0"></div>
+                <div class="cell" data-row="0" data-column="1"></div>
+                <div class="cell" data-row="0" data-column="2"></div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="1" data-column="0"></div>
+                <div class="cell" data-row="1" data-column="1"></div>
+                <div class="cell" data-row="1" data-column="2"></div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="2" data-column="0"></div>
+                <div class="cell" data-row="2" data-column="1"></div>
+                <div class="cell" data-row="2" data-column="2"></div>
+            </div>
         </div>
-        <div class="row">
-            <div class="cell" data-row="1" data-column="0"></div>
-            <div class="cell" data-row="1" data-column="1"></div>
-            <div class="cell" data-row="1" data-column="2"></div>
-        </div>
-        <div class="row">
-            <div class="cell" data-row="2" data-column="0"></div>
-            <div class="cell" data-row="2" data-column="1"></div>
-            <div class="cell" data-row="2" data-column="2"></div>
+        <div class="game-controls">
+            <button type="button" onClick="window.location.reload()">Start new game</button>
         </div>
     </div>
+    
+    <div class="status-container">
+        <div id="game-status"></div>
+        <h3 id="is-marked-warning">This space is already marked! Choose a different move.</h3>
+    </div>
 
-    <dialog id="playerWonDialog">
+    <dialog id="result-dialog">
         <form method="dialog">
-            <div>
-                <button type="button" onClick="window.location.reload()">Restart</button>
+            <div class="dialog-container">
+                <h3 id="result-message"></h3>
+                <button type="button" id="close-button" onclick="closeDialog()">Close</button>
             </div>
         </form>
     </dialog>
 
-    <dialog id="tieDialog">
+    <dialog id="new-game-dialog">
         <form method="dialog">
             <div>
-                <h3>It's a tie!</h3>
-                <button type="button" onClick="window.location.reload()">Restart</button>
+                <h3>Enter players name:</h3>
+                <input type="text" name="player1-name" id="player1-name">
+                <input type="text" name="player2-name" id="player2-name">
+                <button type="button" onclick="startGame()">Start</button>
             </div>
         </form>
     </dialog>
