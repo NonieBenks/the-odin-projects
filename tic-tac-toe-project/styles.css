@@ -1,5 +1,16 @@
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+button {
+    border: none;
+    background-color: #607D8B;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
 }
 
 .board {
@@ -48,4 +59,22 @@ div.cell {
 
 .material-symbols-outlined {
     font-size: 90px !important;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.dialog-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#is-marked-warning {
+    display: none;
+    width: 300px;
+    margin: 20px auto;
+    border: 2px solid orange;
 }
