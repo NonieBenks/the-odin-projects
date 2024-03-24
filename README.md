@@ -1,2 +1,2 @@
 # the-odin-projects
-Project assignments from the Odin Project course.
+Smaller project assignments from the Odin Project course in one place.
